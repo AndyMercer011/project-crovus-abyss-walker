@@ -1,0 +1,21 @@
+{
+    "name": "UltimateInventorySystemOverride",
+    "rootNamespace": "",
+    "references": [
+        "Unity.TextMeshPro",
+        "Unity.InputSystem",
+        "MoreMountains.Tools",
+        "MoreMountains.TopDownEngine",
+        "Opsive.UltimateInventorySystem",
+        "Opsive.Shared"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

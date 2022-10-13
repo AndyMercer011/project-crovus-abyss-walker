@@ -1,0 +1,81 @@
+stages:
+  - dependency_build
+  - pre_merge_check
+  - build_and_test
+  - docs
+
+variables:
+  DOCKER_TLS_CERTDIR: "/certs"
+
+.cache: &cache
+  cache:
+    key: "$CI_PROJECT_NAMESPACE-$CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG-$TEST_PLATFORM"
+    paths:
+      - $UNITY_DIR/Library/
+
+#####################################################################################################
+## Dependency Build                                                                         #########
+#####################################################################################################
+build_docfx_env:
+  tags:
+    - docker
+  stage: dependency_build
+  image: docker:stable
+  before_script:
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+  script:
+    - >
+      docker build
+      --pull
+      --cache-from $CI_REGISTRY_IMAGE/docfx_env:latest
+      --label "org.opencontainers.image.title=$CI_PROJECT_TITLE"
+      --label "org.opencontainers.image.url=$CI_PROJECT_URL"
+      --label "org.opencontainers.image.created=$CI_JOB_STARTED_AT"
+      --label "org.opencontainers.image.revision=$CI_COMMIT_SHA"
+      --label "org.opencontainers.image.version=$CI_COMMIT_REF_NAME"
+      --tag $CI_REGISTRY_IMAGE/docfx_env:$CI_COMMIT_SHA
+      - < ci/dockerfiles/docs_gen.dockerfile
+    - docker push $CI_REGISTRY_IMAGE/docfx_env:$CI_COMMIT_SHA
+  services:
+    - docker:stable-dind
+  rules:
+    - changes:
+        - ci/dockerfiles/docs_gen.dockerfile
+
+push_docfx_env_latest:
+  tags:
+    - docker
+  variables:
+    GIT_STRATEGY: none
+  image: docker:stable
+  stage: dependency_build
+  before_script:
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+  script:
+    - docker pull $CI_REGISTRY_IMAGE/docfx_env:$CI_COMMIT_SHA
+    - docker tag $CI_REGISTRY_IMAGE/docfx_env:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE/docfx_env:latest
+    - docker push $CI_REGISTRY_IMAGE/docfx_env:latest
+  services:
+    - docker:stable-dind
+  rules:
+    - changes:
+        - ci/dockerfiles/docs_gen.dockerfile
+  needs:
+    - build_docfx_env
+
+#####################################################################################################
+## Documentation                                                                             ########
+#####################################################################################################
+pages:
+  tags:
+    - docker
+  stage: docs
+  image: $CI_REGISTRY_IMAGE/docfx_env:latest
+  script:
+    - mono-sgen /opt/docfx/docfx.exe Documentation/docfx.json
+    - mv Documentation/_site public
+  artifacts:
+    paths:
+      - public
+  only:
+    - master

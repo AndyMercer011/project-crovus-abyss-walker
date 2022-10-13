@@ -1,0 +1,44 @@
+{
+    "name": "TopDownOverride",
+    "rootNamespace": "",
+    "references": [
+        "GUID:4a1cb1490dc4df8409b2580d6b44e75e",
+        "GUID:8087d854c1f812e4b9a74437dfc524e0",
+        "GUID:f81e926ef5b1a3e4fad4bc10bb9e5633",
+        "GUID:8a258d69670d9a54d943dd0e57ffea8a",
+        "GUID:8f27f7a0f8da9854cb7c86f15d58fe82",
+        "GUID:4307f53044263cf4b835bd812fc161a4",
+        "GUID:d60799ab2a985554ea1a39cd38695018",
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:02650bbac8118a04f9180ab423fe60c4",
+        "GUID:ba880a3c55a41254a91d85dd28666dda",
+        "GUID:1dbcca72f42070548a895178556c5bc3",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:7fcca945b9990d94c90b052eecf8cd77",
+        "GUID:141839a4b5b6e214bbdc0d64e15010ad",
+        "GUID:33948188067f67944b82252675cf09c3",
+        "GUID:d8e89a79cd8df884b8d5b3356783eb74",
+        "GUID:15fc0a57446b3144c949da3e2b9737a9",
+        "GUID:df380645f10b7bc4b97d4f5eb6303d95"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.cinemachine",
+            "expression": "1.0.0",
+            "define": "MM_CINEMACHINE"
+        },
+        {
+            "name": "com.unity.render-pipelines.universal",
+            "expression": "1.0.0",
+            "define": "Unity_URP"
+        }
+    ],
+    "noEngineReferences": false
+}

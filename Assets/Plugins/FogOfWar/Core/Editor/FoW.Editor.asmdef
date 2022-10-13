@@ -1,0 +1,18 @@
+{
+    "name": "FoW.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:7fcca945b9990d94c90b052eecf8cd77"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

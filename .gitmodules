@@ -1,0 +1,6 @@
+[submodule "Assets/ArtAssets"]
+	path = Assets/ArtAssets
+	url = git@gitlab.hanzec.com:rubble-studio/project-crovus-abyss-walker-art-assets.git
+[submodule "Assets/Plugins/Opsive"]
+	path = Assets/Plugins/Opsive
+	url = git@gitlab.hanzec.com:rubble-studio/ultimate-inventory-system.git
